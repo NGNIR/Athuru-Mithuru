@@ -11,18 +11,6 @@ const DysgraphiaGamePage = ({ onBack }) => {
   const [timeLeft, setTimeLeft] = useState(15);
   const [responses, setResponses] = useState([]);
 
-  // Define handleTimeUp function before useEffect
-  const handleTimeUp = () => {
-    setResponses(prev => [...prev, {
-      question: currentQuestion,
-      userAnswer: null,
-      correct: currentQuestions[currentQuestion].correct,
-      timeTaken: 15,
-      isCorrect: false
-    }]);
-    nextQuestion();
-  };
-
   // Game data for each level - Handwriting and letter formation exercises
   const gameData = {
     1: [
@@ -162,6 +150,18 @@ const DysgraphiaGamePage = ({ onBack }) => {
   const currentQuestions = gameData[currentLevel];
   const totalQuestions = currentQuestions.length;
 
+  // Define handleTimeUp function before useEffect
+  const handleTimeUp = () => {
+    setResponses(prev => [...prev, {
+      question: currentQuestion,
+      userAnswer: null,
+      correct: currentQuestions[currentQuestion].correct,
+      timeTaken: 15,
+      isCorrect: false
+    }]);
+    nextQuestion();
+  };
+
   // Timer effect
   useEffect(() => {
     if (gameStarted && !gameCompleted && !showResult && timeLeft > 0) {
@@ -172,7 +172,7 @@ const DysgraphiaGamePage = ({ onBack }) => {
     } else if (timeLeft === 0 && !showResult) {
       handleTimeUp();
     }
-  }, [timeLeft, gameStarted, gameCompleted, showResult]);
+  }, [timeLeft, gameStarted, gameCompleted, showResult, handleTimeUp]);
 
   const startGame = () => {
     setGameStarted(true);
