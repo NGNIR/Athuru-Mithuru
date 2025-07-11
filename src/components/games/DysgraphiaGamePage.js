@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from 'react';
 
-const ScienceGamePage = ({ onBack }) => {
+const DysgraphiaGamePage = ({ onBack }) => {
   const [currentLevel, setCurrentLevel] = useState(1);
   const [currentQuestion, setCurrentQuestion] = useState(0);
   const [score, setScore] = useState(0);
@@ -8,7 +8,7 @@ const ScienceGamePage = ({ onBack }) => {
   const [gameCompleted, setGameCompleted] = useState(false);
   const [selectedAnswer, setSelectedAnswer] = useState(null);
   const [showResult, setShowResult] = useState(false);
-  const [timeLeft, setTimeLeft] = useState(10);
+  const [timeLeft, setTimeLeft] = useState(15);
   const [responses, setResponses] = useState([]);
 
   // Define handleTimeUp function before useEffect
@@ -17,43 +17,145 @@ const ScienceGamePage = ({ onBack }) => {
       question: currentQuestion,
       userAnswer: null,
       correct: currentQuestions[currentQuestion].correct,
-      timeTaken: 10,
+      timeTaken: 15,
       isCorrect: false
     }]);
     nextQuestion();
   };
 
-  // Game data for each level
+  // Game data for each level - Handwriting and letter formation exercises
   const gameData = {
     1: [
-      { letter1: 'a', letter2: 'a', correct: 'Similar', description: 'එකම අකුරු' },
-      { letter1: 'm', letter2: 'n', correct: 'Different', description: 'වෙනස් අකුරු' },
-      { letter1: 'c', letter2: 'c', correct: 'Similar', description: 'එකම අකුරු' },
-      { letter1: 'o', letter2: 'a', correct: 'Different', description: 'වෙනස් අකුරු' },
-      { letter1: 'e', letter2: 'e', correct: 'Similar', description: 'එකම අකුරු' },
-      { letter1: 'i', letter2: 'l', correct: 'Different', description: 'වෙනස් අකුරු' },
-      { letter1: 's', letter2: 's', correct: 'Similar', description: 'එකම අකුරු' },
-      { letter1: 'f', letter2: 't', correct: 'Different', description: 'වෙනස් අකුරු' }
+      { 
+        instruction: 'නිවැරදි අකුර තෝරන්න', 
+        target: 'අ', 
+        options: ['අ', 'ආ', 'ඇ', 'ඈ'], 
+        correct: 'අ',
+        description: 'මූලික සිංහල ස්වර අකුරු හඳුනාගැනීම'
+      },
+      { 
+        instruction: 'නිවැරදි අකුර තෝරන්න', 
+        target: 'ක', 
+        options: ['ක', 'ඛ', 'ග', 'ඝ'], 
+        correct: 'ක',
+        description: 'මූලික සිංහල ව්‍යාංජන අකුරු හඳුනාගැනීම'
+      },
+      { 
+        instruction: 'නිවැරදි අකුර තෝරන්න', 
+        target: 'ම', 
+        options: ['ම', 'ය', 'ර', 'ල'], 
+        correct: 'ම',
+        description: 'සමාන පෙනුමක් ඇති අකුරු වෙන්කර හඳුනාගැනීම'
+      },
+      { 
+        instruction: 'නිවැරදි අකුර තෝරන්න', 
+        target: 'ස', 
+        options: ['ස', 'හ', 'ළ', 'ෆ'], 
+        correct: 'ස',
+        description: 'සංකීර්ණ හැඩයක් ඇති අකුරු හඳුනාගැනීම'
+      },
+      { 
+        instruction: 'නිවැරදි අකුර තෝරන්න', 
+        target: 'ට', 
+        options: ['ට', 'ඨ', 'ඩ', 'ඪ'], 
+        correct: 'ට',
+        description: 'ටකාර වර්ගයේ අකුරු හඳුනාගැනීම'
+      },
+      { 
+        instruction: 'නිවැරදි අකුර තෝරන්න', 
+        target: 'න', 
+        options: ['න', 'ණ', 'ඳ', 'ධ'], 
+        correct: 'න',
+        description: 'නකාර වර්ගයේ අකුරු හඳුනාගැනීම'
+      }
     ],
     2: [
-      { letter1: 'b', letter2: 'd', correct: 'Different', description: 'ප්‍රතිලෝම අකුරු' },
-      { letter1: 'p', letter2: 'q', correct: 'Different', description: 'ප්‍රතිලෝම අකුරු' },
-      { letter1: 'n', letter2: 'u', correct: 'Different', description: 'ප්‍රතිලෝම අකුරු' },
-      { letter1: 'w', letter2: 'm', correct: 'Different', description: 'ප්‍රතිලෝම අකුරු' },
-      { letter1: 'b', letter2: 'b', correct: 'Similar', description: 'එකම අකුරු' },
-      { letter1: 'd', letter2: 'd', correct: 'Similar', description: 'එකම අකුරු' },
-      { letter1: 'p', letter2: 'p', correct: 'Similar', description: 'එකම අකුරු' },
-      { letter1: 'q', letter2: 'q', correct: 'Similar', description: 'එකම අකුරු' }
+      { 
+        instruction: 'නිවැරදි පිල්ලම් සහිත අකුර තෝරන්න', 
+        target: 'කා', 
+        options: ['කා', 'කැ', 'කෑ', 'කි'], 
+        correct: 'කා',
+        description: 'ආකාර පිල්ලම සහිත අකුරු'
+      },
+      { 
+        instruction: 'නිවැරදි පිල්ලම් සහිත අකුර තෝරන්න', 
+        target: 'මේ', 
+        options: ['මේ', 'මො', 'මෝ', 'මු'], 
+        correct: 'මේ',
+        description: 'ඒකාර පිල්ලම සහිත අකුරු'
+      },
+      { 
+        instruction: 'නිවැරදි පිල්ලම් සහිත අකුර තෝරන්න', 
+        target: 'සි', 
+        options: ['සි', 'සී', 'සු', 'සූ'], 
+        correct: 'සි',
+        description: 'ඉකාර පිල්ලම සහිත අකුරු'
+      },
+      { 
+        instruction: 'නිවැරදි පිල්ලම් සහිත අකුර තෝරන්න', 
+        target: 'තු', 
+        options: ['තු', 'තූ', 'තෙ', 'තො'], 
+        correct: 'තු',
+        description: 'උකාර පිල්ලම සහිත අකුරු'
+      },
+      { 
+        instruction: 'නිවැරදි පිල්ලම් සහිත අකුර තෝරන්න', 
+        target: 'රෙ', 
+        options: ['රෙ', 'රේ', 'රො', 'රෝ'], 
+        correct: 'රෙ',
+        description: 'එකාර පිල්ලම සහිත අකුරු'
+      },
+      { 
+        instruction: 'නිවැරදි පිල්ලම් සහිත අකුර තෝරන්න', 
+        target: 'ලෝ', 
+        options: ['ලෝ', 'ලො', 'ලූ', 'ලු'], 
+        correct: 'ලෝ',
+        description: 'ඕකාර පිල්ලම සහිත අකුරු'
+      }
     ],
     3: [
-      { letter1: 'g', letter2: 'q', correct: 'Different', description: 'සමාන පෙනුමක් ඇති වෙනස් අකුරු' },
-      { letter1: 'h', letter2: 'n', correct: 'Different', description: 'සමාන පෙනුමක් ඇති වෙනස් අකුරු' },
-      { letter1: 'r', letter2: 'n', correct: 'Different', description: 'සමාන පෙනුමක් ඇති වෙනස් අකුරු' },
-      { letter1: 'a', letter2: 'o', correct: 'Different', description: 'සමාන පෙනුමක් ඇති වෙනස් අකුරු' },
-      { letter1: 'g', letter2: 'g', correct: 'Similar', description: 'එකම අකුරු' },
-      { letter1: 'h', letter2: 'h', correct: 'Similar', description: 'එකම අකුරු' },
-      { letter1: 'r', letter2: 'r', correct: 'Similar', description: 'එකම අකුරු' },
-      { letter1: 'v', letter2: 'w', correct: 'Different', description: 'සමාන පෙනුමක් ඇති වෙනස් අකුරු' }
+      { 
+        instruction: 'නිවැරදි සංයුක්ත අකුර තෝරන්න', 
+        target: 'ක්‍ර', 
+        options: ['ක්‍ර', 'ක්‍ල', 'ග්‍ර', 'ත්‍ර'], 
+        correct: 'ක්‍ර',
+        description: 'රේඵ සහිත සංයුක්ත අකුරු'
+      },
+      { 
+        instruction: 'නිවැරදි සංයුක්ත අකුර තෝරන්න', 
+        target: 'ප්‍ර', 
+        options: ['ප්‍ර', 'බ්‍ර', 'ප්‍ල', 'ම්‍ර'], 
+        correct: 'ප්‍ර',
+        description: 'පකාර රේඵ සහිත අකුරු'
+      },
+      { 
+        instruction: 'නිවැරදි සංයුක්ත අකුර තෝරන්න', 
+        target: 'ස්‍ථ', 
+        options: ['ස්‍ථ', 'ස්‍ත', 'ශ්‍ථ', 'ෂ්‍ඨ'], 
+        correct: 'ස්‍ථ',
+        description: 'සකාර සංයුක්ත අකුරු'
+      },
+      { 
+        instruction: 'නිවැරදි සංයුක්ත අකුර තෝරන්න', 
+        target: 'න්‍ද', 
+        options: ['න්‍ද', 'ඳ්‍ද', 'ද්‍ද', 'ත්‍ද'], 
+        correct: 'න්‍ද',
+        description: 'නකාර සංයුක්ත අකුරු'
+      },
+      { 
+        instruction: 'නිවැරදි සංයුක්ත අකුර තෝරන්න', 
+        target: 'ක්‍ෂ', 
+        options: ['ක්‍ෂ', 'ඛ්‍ෂ', 'ග්‍ෂ', 'ච්‍ෂ'], 
+        correct: 'ක්‍ෂ',
+        description: 'ක්ෂකාර සංයුක්ත අකුරු'
+      },
+      { 
+        instruction: 'නිවැරදි සංයුක්ත අකුර තෝරන්න', 
+        target: 'ශ්‍ර', 
+        options: ['ශ්‍ර', 'ෂ්‍ර', 'ස්‍ර', 'හ්‍ර'], 
+        correct: 'ශ්‍ර',
+        description: 'ශකාර රේඵ සහිත අකුරු'
+      }
     ]
   };
 
@@ -79,7 +181,7 @@ const ScienceGamePage = ({ onBack }) => {
     setResponses([]);
     setSelectedAnswer(null);
     setShowResult(false);
-    setTimeLeft(10);
+    setTimeLeft(15);
   };
 
   const handleAnswer = (answer) => {
@@ -89,7 +191,7 @@ const ScienceGamePage = ({ onBack }) => {
     setShowResult(true);
     
     const isCorrect = answer === currentQuestions[currentQuestion].correct;
-    const timeTaken = 10 - timeLeft;
+    const timeTaken = 15 - timeLeft;
     
     setResponses(prev => [...prev, {
       question: currentQuestion,
@@ -113,7 +215,7 @@ const ScienceGamePage = ({ onBack }) => {
       setCurrentQuestion(currentQuestion + 1);
       setSelectedAnswer(null);
       setShowResult(false);
-      setTimeLeft(10);
+      setTimeLeft(15);
     } else {
       completeLevel();
     }
@@ -133,7 +235,7 @@ const ScienceGamePage = ({ onBack }) => {
       setResponses([]);
       setSelectedAnswer(null);
       setShowResult(false);
-      setTimeLeft(10);
+      setTimeLeft(15);
     }
   };
 
@@ -146,14 +248,14 @@ const ScienceGamePage = ({ onBack }) => {
     setResponses([]);
     setSelectedAnswer(null);
     setShowResult(false);
-    setTimeLeft(10);
+    setTimeLeft(15);
   };
 
   const getLevelDescription = (level) => {
     const descriptions = {
-      1: 'මූලික දෘශ්‍ය වෙනස්කම් හඳුනාගැනීම',
-      2: 'සාමාන්‍ය ඩිස්ලෙක්සික් ව්‍යාකූලතා',
-      3: 'උසස් දෘශ්‍ය වෙනස්කම් හඳුනාගැනීම'
+      1: 'මූලික සිංහල අකුරු හඳුනාගැනීම',
+      2: 'පිල්ලම් සහිත අකුරු හඳුනාගැනීම',
+      3: 'සංයුක්ත අකුරු හඳුනාගැනීම'
     };
     return descriptions[level];
   };
@@ -166,11 +268,11 @@ const ScienceGamePage = ({ onBack }) => {
     
     let analysis = '';
     if (accuracy >= 80) {
-      analysis = 'විශිෂ්ට! දෘශ්‍ය වෙනස්කම් හඳුනාගැනීමේ හැකියාව ඉතා හොඳයි.';
+      analysis = 'විශිෂ්ට! අකුරු හඳුනාගැනීමේ හැකියාව ඉතා හොඳයි.';
     } else if (accuracy >= 60) {
       analysis = 'හොඳයි! තව ටිකක් අභ්‍යාස කිරීමෙන් වැඩිදියුණු කළ හැක.';
     } else {
-      analysis = 'අවධානය අවශ්‍යයි. දෘශ්‍ය වෙනස්කම් හඳුනාගැනීමේ අභ්‍යාස අවශ්‍ය විය හැක.';
+      analysis = 'අවධානය අවශ්‍යයි. අකුරු හඳුනාගැනීමේ අභ්‍යාස අවශ්‍ය විය හැක.';
     }
     
     return { accuracy, averageTime, analysis };
@@ -178,11 +280,11 @@ const ScienceGamePage = ({ onBack }) => {
 
   if (!gameStarted) {
     return (
-      <div className="min-h-screen bg-gradient-to-b from-yellow-900 via-yellow-700 to-yellow-500 flex items-center justify-center p-4">
+      <div className="min-h-screen bg-gradient-to-b from-purple-900 via-purple-700 to-purple-500 flex items-center justify-center p-4">
         <div className="text-center text-white max-w-2xl">
-          <div className="text-8xl mb-8">🧠</div>
-          <h1 className="text-5xl font-bold mb-8">දෘශ්‍ය වෙනස්කම් ක්‍රීඩාව</h1>
-          <p className="text-2xl mb-8">අකුරු වල සමානකම් සහ වෙනස්කම් හඳුනාගන්න</p>
+          <div className="text-8xl mb-8">✍️</div>
+          <h1 className="text-5xl font-bold mb-8">අකුරු ලේඛන ක්‍රීඩාව</h1>
+          <p className="text-2xl mb-8">සිංහල අකුරු නිවැරදිව හඳුනාගන්න</p>
           
           <div className="bg-white/20 backdrop-blur-sm rounded-2xl p-8 mb-8">
             <h2 className="text-3xl font-bold mb-6">මට්ටම {currentLevel}</h2>
@@ -195,7 +297,7 @@ const ScienceGamePage = ({ onBack }) => {
               </div>
               <div className="bg-white/10 rounded-lg p-4">
                 <div className="text-sm opacity-80">කාලය (ප්‍රශ්නයකට)</div>
-                <div className="text-2xl font-bold">10 තත්පර</div>
+                <div className="text-2xl font-bold">15 තත්පර</div>
               </div>
               <div className="bg-white/10 rounded-lg p-4">
                 <div className="text-sm opacity-80">මට්ටම</div>
@@ -206,16 +308,16 @@ const ScienceGamePage = ({ onBack }) => {
             <div className="mb-6">
               <h3 className="text-lg font-bold mb-3">ක්‍රීඩා නියම</h3>
               <ul className="text-left space-y-2 max-w-md mx-auto">
-                <li>• දෙ අකුරු සමාන ද වෙනස් ද යන්න තීරණය කරන්න</li>
-                <li>• ප්‍රශ්නයකට තත්පර 10ක් ලැබේ</li>
-                <li>• "සමාන" හෝ "වෙනස්" තෝරන්න</li>
+                <li>• ලබා දී ඇති අකුරට සමාන අකුර තෝරන්න</li>
+                <li>• ප්‍රශ්නයකට තත්පර 15ක් ලැබේ</li>
+                <li>• නිවැරදි අකුර ක්ලික් කරන්න</li>
                 <li>• සියලු ප්‍රශ්න සම්පූර්ණ කර ඊළඟ මට්ටමට යන්න</li>
               </ul>
             </div>
             
             <button
               onClick={startGame}
-              className="bg-white text-yellow-600 px-8 py-4 rounded-full font-bold text-xl hover:bg-gray-100 transition-colors duration-300 shadow-lg"
+              className="bg-white text-purple-600 px-8 py-4 rounded-full font-bold text-xl hover:bg-gray-100 transition-colors duration-300 shadow-lg"
             >
               ක්‍රීඩාව ආරම්භ කරන්න
             </button>
@@ -236,7 +338,7 @@ const ScienceGamePage = ({ onBack }) => {
     const analysis = getPerformanceAnalysis();
     
     return (
-      <div className="min-h-screen bg-gradient-to-b from-yellow-900 via-yellow-700 to-yellow-500 flex items-center justify-center p-4">
+      <div className="min-h-screen bg-gradient-to-b from-purple-900 via-purple-700 to-purple-500 flex items-center justify-center p-4">
         <div className="text-center text-white max-w-2xl">
           <div className="text-8xl mb-8">🎉</div>
           <h1 className="text-5xl font-bold mb-8">මට්ටම {currentLevel} සම්පූර්ණයි!</h1>
@@ -281,7 +383,7 @@ const ScienceGamePage = ({ onBack }) => {
               
               <button
                 onClick={onBack}
-                className="bg-white text-yellow-600 px-6 py-3 rounded-full font-bold hover:bg-gray-100 transition-colors duration-300"
+                className="bg-white text-purple-600 px-6 py-3 rounded-full font-bold hover:bg-gray-100 transition-colors duration-300"
               >
                 ← ආපසු යන්න
               </button>
@@ -295,7 +397,7 @@ const ScienceGamePage = ({ onBack }) => {
   const currentQ = currentQuestions[currentQuestion];
 
   return (
-    <div className="min-h-screen bg-gradient-to-b from-yellow-900 via-yellow-700 to-yellow-500 flex items-center justify-center p-4">
+    <div className="min-h-screen bg-gradient-to-b from-purple-900 via-purple-700 to-purple-500 flex items-center justify-center p-4">
       <div className="text-center text-white max-w-2xl w-full">
         {/* Header */}
         <div className="flex justify-between items-center mb-8">
@@ -305,7 +407,7 @@ const ScienceGamePage = ({ onBack }) => {
           </div>
           <div className="text-right">
             <div className="text-lg font-bold">ලකුණු: {score}</div>
-            <div className={`text-2xl font-bold ${timeLeft <= 3 ? 'text-red-300 animate-pulse' : ''}`}>
+            <div className={`text-2xl font-bold ${timeLeft <= 5 ? 'text-red-300 animate-pulse' : ''}`}>
               ⏰ {timeLeft}
             </div>
           </div>
@@ -321,54 +423,36 @@ const ScienceGamePage = ({ onBack }) => {
 
         {/* Question */}
         <div className="bg-white/20 backdrop-blur-sm rounded-2xl p-8 mb-8">
-          <h2 className="text-2xl font-bold mb-8">මෙම අකුරු සමාන ද වෙනස් ද?</h2>
+          <h2 className="text-2xl font-bold mb-6">{currentQ.instruction}</h2>
           
-          {/* Letters Display */}
-          <div className="flex justify-center items-center gap-12 mb-8">
-            <div className="bg-white rounded-2xl w-32 h-32 flex items-center justify-center shadow-2xl">
-              <span className="text-8xl font-bold text-gray-800">{currentQ.letter1}</span>
-            </div>
-            
-            <div className="text-4xl font-bold">VS</div>
-            
-            <div className="bg-white rounded-2xl w-32 h-32 flex items-center justify-center shadow-2xl">
-              <span className="text-8xl font-bold text-gray-800">{currentQ.letter2}</span>
+          {/* Target Letter Display */}
+          <div className="mb-8">
+            <div className="text-lg mb-4 opacity-80">මෙම අකුරට සමාන අකුර තෝරන්න:</div>
+            <div className="bg-white rounded-2xl w-32 h-32 flex items-center justify-center shadow-2xl mx-auto">
+              <span className="text-6xl font-bold text-gray-800">{currentQ.target}</span>
             </div>
           </div>
 
-          {/* Answer Buttons */}
-          <div className="flex gap-6 justify-center">
-            <button
-              onClick={() => handleAnswer('Similar')}
-              disabled={selectedAnswer || showResult}
-              className={`px-8 py-4 rounded-full font-bold text-xl transition-all duration-300 shadow-lg ${
-                showResult && currentQ.correct === 'Similar'
-                  ? 'bg-green-500 text-white'
-                  : showResult && selectedAnswer === 'Similar' && currentQ.correct !== 'Similar'
-                  ? 'bg-red-500 text-white'
-                  : selectedAnswer === 'Similar'
-                  ? 'bg-blue-500 text-white'
-                  : 'bg-white text-yellow-600 hover:bg-gray-100'
-              } ${selectedAnswer || showResult ? 'cursor-not-allowed' : 'hover:scale-105'}`}
-            >
-              සමාන
-            </button>
-            
-            <button
-              onClick={() => handleAnswer('Different')}
-              disabled={selectedAnswer || showResult}
-              className={`px-8 py-4 rounded-full font-bold text-xl transition-all duration-300 shadow-lg ${
-                showResult && currentQ.correct === 'Different'
-                  ? 'bg-green-500 text-white'
-                  : showResult && selectedAnswer === 'Different' && currentQ.correct !== 'Different'
-                  ? 'bg-red-500 text-white'
-                  : selectedAnswer === 'Different'
-                  ? 'bg-blue-500 text-white'
-                  : 'bg-white text-yellow-600 hover:bg-gray-100'
-              } ${selectedAnswer || showResult ? 'cursor-not-allowed' : 'hover:scale-105'}`}
-            >
-              වෙනස්
-            </button>
+          {/* Answer Options */}
+          <div className="grid grid-cols-2 gap-4 max-w-md mx-auto">
+            {currentQ.options.map((option, index) => (
+              <button
+                key={index}
+                onClick={() => handleAnswer(option)}
+                disabled={selectedAnswer || showResult}
+                className={`w-24 h-24 rounded-xl font-bold text-3xl transition-all duration-300 shadow-lg ${
+                  showResult && currentQ.correct === option
+                    ? 'bg-green-500 text-white'
+                    : showResult && selectedAnswer === option && currentQ.correct !== option
+                    ? 'bg-red-500 text-white'
+                    : selectedAnswer === option
+                    ? 'bg-blue-500 text-white'
+                    : 'bg-white text-gray-800 hover:bg-gray-100'
+                } ${selectedAnswer || showResult ? 'cursor-not-allowed' : 'hover:scale-105'}`}
+              >
+                {option}
+              </button>
+            ))}
           </div>
 
           {/* Result Display */}
@@ -380,7 +464,7 @@ const ScienceGamePage = ({ onBack }) => {
                 {selectedAnswer === currentQ.correct ? '✅ නිවැරදියි!' : '❌ වැරදියි!'}
               </div>
               <div className="text-lg">
-                නිවැරදි පිළිතුර: <span className="font-bold">{currentQ.correct}</span>
+                නිවැරදි පිළිතුර: <span className="font-bold text-2xl">{currentQ.correct}</span>
               </div>
               <div className="text-sm opacity-80 mt-2">{currentQ.description}</div>
             </div>
@@ -389,11 +473,11 @@ const ScienceGamePage = ({ onBack }) => {
 
         {/* Instructions */}
         <div className="text-sm opacity-80">
-          අකුරු දෙක සමාන නම් "සමාන" ද, වෙනස් නම් "වෙනස්" ද තෝරන්න
+          ඉහත දක්වා ඇති අකුරට සමාන අකුර තෝරන්න
         </div>
       </div>
     </div>
   );
 };
 
-export default ScienceGamePage;
+export default DysgraphiaGamePage;

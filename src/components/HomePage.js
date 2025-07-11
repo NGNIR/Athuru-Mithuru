@@ -3,6 +3,7 @@ import MathGamePage from './games/MathGamePage';
 import SinhalaGamePage from './games/SinhalaGamePage';
 import EnglishGamePage from './games/EnglishGamePage';
 import ScienceGamePage from './games/ScienceGamePage';
+import DysgraphiaGamePage from './games/DysgraphiaGamePage';
 import ProfilePage from './ProfilePage';
 
 const HomePage = ({ onLogout, user }) => {
@@ -48,6 +49,16 @@ const HomePage = ({ onLogout, user }) => {
       orbitSpeed: 12,
       page: 'science',
       ringColor: '#FDD757'
+    },
+    {
+      id: 'dysgraphia',
+      name: 'අකුරු ලේඛන',
+      color: '#9B59B6',
+      size: 'w-22 h-22',
+      orbitRadius: 280,
+      orbitSpeed: 18,
+      page: 'dysgraphia',
+      ringColor: '#C39BD3'
     }
   ];
 
@@ -65,6 +76,8 @@ const HomePage = ({ onLogout, user }) => {
         return <EnglishGamePage onBack={() => setCurrentPage('home')} />;
       case 'science':
         return <ScienceGamePage onBack={() => setCurrentPage('home')} />;
+      case 'dysgraphia':
+        return <DysgraphiaGamePage onBack={() => setCurrentPage('home')} />;
       case 'profile':
         return <ProfilePage onBack={() => setCurrentPage('home')} user={user} />;
       default:
@@ -288,6 +301,11 @@ const HomePage = ({ onLogout, user }) => {
         @keyframes horizontalOrbit-science {
           0% { transform: translate(-50%, -50%) rotate(0deg) translateX(420px) rotate(0deg); }
           100% { transform: translate(-50%, -50%) rotate(360deg) translateX(420px) rotate(-360deg); }
+        }
+        
+        @keyframes horizontalOrbit-dysgraphia {
+          0% { transform: translate(-50%, -50%) rotate(0deg) translateX(280px) rotate(0deg); }
+          100% { transform: translate(-50%, -50%) rotate(360deg) translateX(280px) rotate(-360deg); }
         }
 
         /* Ring Rotation */
