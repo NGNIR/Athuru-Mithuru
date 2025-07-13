@@ -478,45 +478,6 @@ const DysgraphiaGamePage = ({ onBack }) => {
         </div>
       </div>
 
-      {/* Stars Background Container */}
-      <div className="absolute inset-4 border-2 border-white/20 rounded-lg overflow-hidden pointer-events-none">
-        <div className="absolute inset-0">
-          {[...Array(150)].map((_, i) => (
-            <div
-              key={i}
-              className="absolute bg-white rounded-full animate-pulse cursor-pointer pointer-events-auto hover:scale-150 transition-transform duration-200"
-              style={{
-                width: Math.random() * 4 + 2 + 'px',
-                height: Math.random() * 4 + 2 + 'px',
-                top: Math.random() * 90 + 5 + '%',
-                left: Math.random() * 90 + 5 + '%',
-                animationDelay: Math.random() * 3 + 's',
-                animationDuration: Math.random() * 2 + 2 + 's',
-                opacity: Math.random() * 0.8 + 0.3
-              }}
-              onClick={() => {
-                // Star click effect
-                const star = document.createElement('div');
-                star.innerHTML = '✨';
-                star.style.position = 'absolute';
-                star.style.fontSize = '20px';
-                star.style.pointerEvents = 'none';
-                star.style.zIndex = '1000';
-                star.style.animation = 'starPop 1s ease-out forwards';
-                document.body.appendChild(star);
-                
-                const rect = event.target.getBoundingClientRect();
-                star.style.left = rect.left + 'px';
-                star.style.top = rect.top + 'px';
-                
-                setTimeout(() => {
-                  document.body.removeChild(star);
-                }, 1000);
-              }}
-            />
-          ))}
-        </div>
-      </div>
 
       <div className="text-center text-white max-w-2xl w-full">
         {/* Header */}
