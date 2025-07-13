@@ -366,7 +366,7 @@ const DysgraphiaGamePage = ({ onBack }) => {
                   star.style.animation = 'starPop 1s ease-out forwards';
                   document.body.appendChild(star);
                   
-                  const rect = event.currentTarget.getBoundingClientRect();
+                  const rect = e.currentTarget.getBoundingClientRect();
                   star.style.left = rect.left + 'px';
                   star.style.top = rect.top + 'px';
                   
@@ -465,7 +465,7 @@ const DysgraphiaGamePage = ({ onBack }) => {
                 star.style.animation = 'starPop 1s ease-out forwards';
                 document.body.appendChild(star);
                 
-                const rect = event.currentTarget.getBoundingClientRect();
+                const rect = e.currentTarget.getBoundingClientRect();
                 star.style.left = rect.left + 'px';
                 star.style.top = rect.top + 'px';
                 
